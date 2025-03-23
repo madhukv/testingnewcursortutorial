@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RetroAnimation - Guestbook</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #000000;
+            font-family: "Comic Sans MS", cursive;
+            color: #ffffff;
+            overflow: hidden;
+            height: 100vh;
+            background: linear-gradient(45deg, #000000, #1a0066, #000000);
+        }
+
+        .container {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 100px;
+        }
+
+        .menu {
+            position: fixed;
+            top: 20px;
+            display: flex;
+            gap: 20px;
+            margin: 20px;
+        }
+
+        .menu-item {
+            background: linear-gradient(to bottom, #666666, #333333);
+            padding: 10px 20px;
+            border: 2px solid #ff00ff;
+            border-radius: 5px;
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 18px;
+            transition: all 0.3s;
+        }
+
+        .menu-item:hover {
+            background: linear-gradient(to bottom, #ff00ff, #990099);
+            transform: scale(1.1);
+        }
+
+        .guestbook-title {
+            font-size: 48px;
+            color: #ff00ff;
+            text-shadow: 2px 2px #00ff00, -2px -2px #0000ff;
+            margin-bottom: 40px;
+        }
+
+        .guestbook-form {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border: 3px solid #ff00ff;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            width: 300px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            color: #00ff00;
+            margin-bottom: 5px;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 5px;
+            background: #000000;
+            border: 1px solid #00ff00;
+            color: #00ff00;
+            font-family: "Courier New", monospace;
+        }
+
+        button {
+            background: linear-gradient(to bottom, #00ff00, #006600);
+            color: #ffffff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-family: "Comic Sans MS", cursive;
+            border-radius: 5px;
+            width: 100%;
+        }
+
+        button:hover {
+            background: linear-gradient(to bottom, #00ff00, #009900);
+        }
+
+        .guestbook-entries {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border: 3px solid #ff00ff;
+            border-radius: 10px;
+            width: 300px;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .entry {
+            border: 1px solid #00ff00;
+            margin-bottom: 10px;
+            padding: 10px;
+            animation: slideIn 0.5s;
+        }
+
+        .entry-name {
+            color: #ff00ff;
+            font-weight: bold;
+        }
+
+        .entry-date {
+            color: #00ff00;
+            font-size: 0.8em;
+            font-family: "Courier New", monospace;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(-100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        .stars {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        /* Scrollbar styling */
+        .guestbook-entries::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        .guestbook-entries::-webkit-scrollbar-track {
+            background: #000000;
+        }
+
+        .guestbook-entries::-webkit-scrollbar-thumb {
+            background: #ff00ff;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="stars" id="stars"></div>
+    <div class="container">
+        <div class="menu">
+            <a href="index.html" class="menu-item">Home</a>
+            <a href="animations.html" class="menu-item">Animations</a>
+            <a href="gallery.html" class="menu-item">Gallery</a>
+            <a href="guestbook.html" class="menu-item">Guestbook</a>
+        </div>
+
+        <h1 class="guestbook-title">Sign My Guestbook!</h1>
+        
+        <div class="guestbook-form">
+            <form id="guestbook-form">
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message:</label>
+                    <textarea id="message" rows="3" required></textarea>
+                </div>
+                <button type="submit">Sign Guestbook!</button>
+            </form>
+        </div>
+
+        <div class="guestbook-entries">
+            <div class="entry">
+                <div class="entry-name">CoolDude99</div>
+                <div class="entry-message">Awesome site!!1!</div>
+                <div class="entry-date">2024-03-14 13:37</div>
+            </div>
+            <div class="entry">
+                <div class="entry-name">WebMaster2000</div>
+                <div class="entry-message">Nice animations!</div>
+                <div class="entry-date">2024-03-14 12:00</div>
+            </div>
+            <div class="entry">
+                <div class="entry-name">l33t_h4x0r</div>
+                <div class="entry-message">first!!!1</div>
+                <div class="entry-date">2024-03-14 00:01</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function createStars() {
+            const stars = document.getElementById('stars');
+            for (let i = 0; i < 50; i++) {
+                const star = document.createElement('div');
+                star.style.position = 'absolute';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.width = '2px';
+                star.style.height = '2px';
+                star.style.background = '#ffffff';
+                star.style.borderRadius = '50%';
+                star.style.animation = `twinkle ${Math.random() * 2 + 1}s infinite`;
+                stars.appendChild(star);
+            }
+        }
+
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes twinkle {
+                0% { opacity: 0; }
+                50% { opacity: 1; }
+                100% { opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Handle form submission
+        document.getElementById('guestbook-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('name').value;
+            const message = document.getElementById('message').value;
+            const date = new Date().toLocaleString();
+
+            const entry = document.createElement('div');
+            entry.className = 'entry';
+            entry.innerHTML = `
+                <div class="entry-name">${name}</div>
+                <div class="entry-message">${message}</div>
+                <div class="entry-date">${date}</div>
+            `;
+
+            document.querySelector('.guestbook-entries').prepend(entry);
+            this.reset();
+        });
+
+        createStars();
+    </script>
+</body>
+</html> 
